@@ -5,3 +5,4 @@ import * as path from "path";
 import * as logger from "morgan";
 import * as favicon from "serve-favicon";
 import * as cookieParser from "cookie-parser";
+import * as bodyParser from "body-parser";
