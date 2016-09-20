@@ -1,12 +1,16 @@
-/// <reference path="../typings/index.d.ts" />
+"use strict";
 
 import * as express from "express";
 
-var router = express.Router();
+module Route {
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+  export class Index {
 
-export { router as routes };
+    public index(req: express.Request, res: express.Response, next: express.NextFunction) {
+      //render page
+      res.render("index", { 'title' : 'Express' });
+    }
+  }
+}
+
+export = Route;
