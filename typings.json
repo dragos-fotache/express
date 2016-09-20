@@ -1,0 +1,11 @@
+{
+  "name": "testnode",
+  "globalDependencies": {
+    "node":"registry:dt/node#6.0.0+20160919063032",
+    "core-js":"registry:dt/core-js#0.0.0+20160914114559",
+    "mysql":"registry:dt/mysql#0.0.0+20160316155526"
+  },
+  "dependencies": {
+    "express":"registry:npm/express#4.14.0+20160911114220"
+  }
+}
