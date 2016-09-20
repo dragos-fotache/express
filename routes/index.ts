@@ -1,4 +1,7 @@
-var express = require('express');
+/// <reference path="../typings/index.d.ts" />
+
+import * as express from "express";
+
 var router = express.Router();
 
 /* GET home page. */
@@ -6,4 +9,4 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-module.exports = router;
+export { router as routes };
