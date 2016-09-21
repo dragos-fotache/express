@@ -17,17 +17,6 @@ class Server {
   public app: express.Application;
 
   /**
-   * Bootstrap the application.
-   *
-   * @class Server
-   * @method bootstrap
-   * @static
-   */
-  public static bootstrap(): Server {
-    return new Server();
-  }
-
-  /**
    * Constructor.
    *
    * @class Server
@@ -66,8 +55,7 @@ class Server {
     this.app.use(bodyParser.urlencoded({ extended: true }));
 
     //add static paths
-    this.app.use(express.static(path.join(__dirname, "public")));
-    this.app.use(express.static(path.join(__dirname, "bower_components")));
+    this.app.use(express.static(path.join(__dirname, "../public")));
 
     // catch 404 and forward to error handler
     this.app.use(function(err: any, req: express.Request, res: express.Response, next: express.NextFunction) {
@@ -91,5 +79,5 @@ class Server {
   }
 }
 
-var server = Server.bootstrap();
+var server = new Server();
 export = server.app;
