@@ -1,9 +1,9 @@
-var express = require('express');
+"use strict";
+var express = require("express");
+function index(req, res, next) {
+    //render page
+    res.send("not yet implemented");
+}
 var router = express.Router();
-
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
-
-module.exports = router;
+exports.router = router;
+router.get("/", index);

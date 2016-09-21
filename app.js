@@ -2,7 +2,8 @@
 var bodyParser = require("body-parser");
 var express = require("express");
 var path = require("path");
-var indexRoute = require("./routes/index");
+var index_1 = require("./routes/index");
+var users_1 = require("./routes/users");
 /**
  * The server.
  *
@@ -68,15 +69,9 @@ var Server = (function () {
      * @return void
      */
     Server.prototype.routes = function () {
-        //get router
-        var router;
-        router = express.Router();
-        //create routes
-        var index = new indexRoute.Index();
-        //home page
-        router.get("/", index.index.bind(index.index));
         //use router middleware
-        this.app.use(router);
+        this.app.use('/', index_1.router);
+        this.app.use('/users', users_1.router);
     };
     return Server;
 }());

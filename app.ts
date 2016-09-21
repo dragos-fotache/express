@@ -4,7 +4,8 @@ import * as bodyParser from "body-parser";
 import * as express from "express";
 import * as path from "path";
 
-import * as indexRoute from "./routes/index";
+import { router as indexRouter } from "./routes/index";
+import { router as usersRouter } from "./routes/users";
 
 /**
  * The server.
@@ -84,18 +85,9 @@ class Server {
    * @return void
    */
   private routes() {
-    //get router
-    let router: express.Router;
-    router = express.Router();
-
-    //create routes
-    var index: indexRoute.Index = new indexRoute.Index();
-
-    //home page
-    router.get("/", index.index.bind(index.index));
-
     //use router middleware
-    this.app.use(router);
+    this.app.use('/', indexRouter);
+    this.app.use('/users', usersRouter);
   }
 }
 
