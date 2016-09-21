@@ -53,7 +53,7 @@ class Server {
    */
   private config() {
     //configure jade
-    this.app.set("views", path.join(__dirname, "views"));
+    this.app.set("views", path.join(__dirname, "../views"));
     this.app.set("view engine", "jade");
 
     //mount logger
