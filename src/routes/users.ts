@@ -3,7 +3,7 @@
 import * as express from "express";
 
 function index(req: express.Request, res: express.Response, next: express.NextFunction) {
-  res.send(req.params['search']);
+  res.send('Your search was: ' + req.params['search']);
 }
 
 var router: express.Router = express.Router();
