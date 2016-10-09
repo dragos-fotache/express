@@ -4,5 +4,5 @@ function index(req, res, next) {
     res.send('Your search was: ' + req.params['search']);
 }
 var router = express.Router();
-exports.router = router;;
+exports.router = router;
 router.get("/:search", index);
