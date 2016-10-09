@@ -41,13 +41,6 @@ class Server {
    * @return void
    */
   private config() {
-    //configure jade
-    this.app.set("views", path.join(__dirname, "../views"));
-    this.app.set("view engine", "jade");
-
-    //mount logger
-    //this.app.use(logger("dev"));
-
     //mount json form parser
     this.app.use(bodyParser.json());
 
