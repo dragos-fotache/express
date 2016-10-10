@@ -11,13 +11,6 @@ var db_config = {
     database: 'test'
 };
 
-// var db_config = {
-//     host: 'us-cdbr-iron-east-04.cleardb.net',
-//     user: 'bb8476f17060ad',
-//     password: '35ae4421',
-//     database: 'heroku_1a9009448f5bede'
-// };
-
 var connection: mysql.IConnection;
 
 function index(req: express.Request, res: express.Response, next: express.NextFunction) {
