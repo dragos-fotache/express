@@ -3,9 +3,11 @@
 import * as bodyParser from "body-parser";
 import * as express from "express";
 import * as path from "path";
+import * as cors from "cors";
 
 import { router as indexRouter } from "./routes/index";
 import { router as usersRouter } from "./routes/users";
+import { router as loginRouter } from "./routes/login";
 
 /**
  * The server.
@@ -50,6 +52,8 @@ class Server {
     //add static paths
     this.app.use(express.static(path.join(__dirname, "../public")));
 
+    this.app.use(cors());
+
     // catch 404 and forward to error handler
     this.app.use(function(err: any, req: express.Request, res: express.Response, next: express.NextFunction) {
       var error = new Error("Not Found");
@@ -68,7 +72,8 @@ class Server {
   private routes() {
     //use router middleware
     this.app.use('/', indexRouter);
-    this.app.use('/users', usersRouter);
+    this.app.use('/users', loginRouter);
+    this.app.use('/login', loginRouter);
   }
 }
 
