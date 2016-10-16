@@ -1,12 +1,13 @@
 "use strict";
 
 import * as bodyParser from "body-parser";
+import * as cookieParser from "cookie-parser";
 import * as express from "express";
 import * as path from "path";
 import * as cors from "cors";
+import * as mongoose from "mongoose";
 
-import { router as indexRouter } from "./routes/index";
-import { router as usersRouter } from "./routes/users";
+import { router as actionRouter } from "./routes/action";
 import { router as loginRouter } from "./routes/login";
 
 /**
@@ -33,6 +34,13 @@ class Server {
 
     //configure routes
     this.routes();
+
+    mongoose.connect('mongodb://localhost/users');
+    var db = mongoose.connection;
+    db.on('error', console.error.bind(console, 'connection error:'));
+    db.once('open', function() {
+        console.log("Connected!");
+    });
   }
 
   /**
@@ -49,10 +57,17 @@ class Server {
     //mount query string parser
     this.app.use(bodyParser.urlencoded({ extended: true }));
 
+    this.app.use(cookieParser());
+
     //add static paths
     this.app.use(express.static(path.join(__dirname, "../public")));
 
-    this.app.use(cors());
+    var corsOptions = {
+      origin: 'http://localhost:3000',
+      credentials: true
+    };
+
+    this.app.use(cors(corsOptions));
 
     // catch 404 and forward to error handler
     this.app.use(function(err: any, req: express.Request, res: express.Response, next: express.NextFunction) {
@@ -71,8 +86,7 @@ class Server {
    */
   private routes() {
     //use router middleware
-    this.app.use('/', indexRouter);
-    this.app.use('/users', loginRouter);
+    this.app.use('/action', actionRouter);
     this.app.use('/login', loginRouter);
   }
 }
