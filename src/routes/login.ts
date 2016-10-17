@@ -5,6 +5,7 @@ import * as express from "express";
 import * as uuid from "node-uuid";
 
 import { User } from "../model/User";
+import { client } from "../app";
 
 function login(req: express.Request, res: express.Response, next: express.NextFunction) {
 
@@ -21,9 +22,6 @@ function login(req: express.Request, res: express.Response, next: express.NextFu
         } else {
             if (user) {
                 if (user['password'] == password) {
-                    let sessionId: String = uuid.v1();
-                    global["sessionId"] = sessionId;
-                    resp.cookie('session', { sessionId: sessionId, userName: name }, { httpOnly: false });
                     resp.status(200);
                     console.log("User found, password matched.");
                 } else {
