@@ -3,11 +3,11 @@
 import * as mongoose from "mongoose";
 import * as express from "express";
 import * as uuid from "node-uuid";
+import * as session from "express-session";
 
 import { User } from "../model/User";
-import { client } from "../app";
 
-function login(req: express.Request, res: express.Response, next: express.NextFunction) {
+function login(req, res: express.Response, next: express.NextFunction) {
 
     let name = req['body'].name 
     let password = req['body'].password;
@@ -24,6 +24,8 @@ function login(req: express.Request, res: express.Response, next: express.NextFu
                 if (user['password'] == password) {
                     resp.status(200);
                     console.log("User found, password matched.");
+                    req.session.user_name = name;
+                    req.session.isLoggedIn = true;
                 } else {
                     resp.status(401);
                     console.log("User found, password not matched.");

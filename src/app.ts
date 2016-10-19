@@ -13,6 +13,11 @@ import * as connectRedis from "connect-redis";
 import { router as actionRouter } from "./routes/action";
 import { router as loginRouter } from "./routes/login";
 
+var client = redis.createClient();
+client.on('connect', function () {
+   console.log('Redis client connected.');
+});
+
 var app: express.Application = express();
 
 app.use(bodyParser.json());
@@ -21,7 +26,7 @@ app.use(cookieParser());
 
 let RedisStore = connectRedis(session);
 app.use(session({
-          store: new RedisStore({}),
+          store: new RedisStore({client: client}),
           secret: 'keyboard cat',
           resave: false,
           saveUninitialized: true
@@ -52,10 +57,5 @@ db.once('open', function () {
   console.log("MongoDB connected.");
 });
 
-var client = redis.createClient();
-client.on('connect', function () {
-  console.log('Redis client connected.');
-});
 
-
-export { app, client };
+export { app };

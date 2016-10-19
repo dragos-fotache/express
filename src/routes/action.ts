@@ -1,11 +1,14 @@
 "use strict";
 
 import * as express from "express";
-import { client } from "../app";
-
 
 function action(req, res: express.Response, next: express.NextFunction) {
 
+    if (req.session.isLoggedIn) {
+        res.status(200);
+    } else {
+        res.status(401);
+    }
     res.send("");
 
 }
